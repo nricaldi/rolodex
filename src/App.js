@@ -9,7 +9,8 @@ class App extends Component {
     super();
     
     this.state = {
-      contacts: []
+      contacts: [],
+      searchField: "",
     };
   }
 
@@ -21,10 +22,23 @@ class App extends Component {
   }
 
   render() {
+
+    const { contacts, searchField } = this.state;
+    const filteredContacts = contacts.filter(contact => 
+      contact.name.toLowerCase().includes(searchField.toLowerCase())
+    );
+
+
     return(
       <div className="App">
 
-        <CardList contacts={this.state.contacts} /> 
+        <h1>Contact Rolodex</h1>
+        <input type="search" 
+               placeholder="Search rolodex" 
+               className="search-field" 
+               onChange={ e => this.setState({ searchField: e.target.value })}
+        />
+        <CardList contacts={filteredContacts} /> 
 
       </div>
     );
@@ -32,26 +46,5 @@ class App extends Component {
   }
 }
 
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;
