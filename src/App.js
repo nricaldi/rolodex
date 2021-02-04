@@ -12,6 +12,8 @@ class App extends Component {
       contacts: [],
       searchField: "",
     };
+
+    // this.handleChange = this.handleChange.bind(this);
   }
 
   // calls as soon as this component is rendered
@@ -21,13 +23,15 @@ class App extends Component {
       .then(users => this.setState({ contacts: users }))
   }
 
-  render() {
+  handleChange = e => {
+    this.setState({ searchField: e.target.value });
+  }
 
+  render() {
     const { contacts, searchField } = this.state;
     const filteredContacts = contacts.filter(contact => 
       contact.name.toLowerCase().includes(searchField.toLowerCase())
     );
-
 
     return(
       <div className="App">
@@ -35,9 +39,8 @@ class App extends Component {
         <h1>Contact Rolodex</h1>
         <SearchBar 
           placeholder="Search rolodex" 
-          handleChange={e => this.setState({ searchField: e.target.value })}
+          handleChange={this.handleChange}
         />
-
         <CardList contacts={filteredContacts} /> 
 
       </div>
@@ -45,6 +48,5 @@ class App extends Component {
 
   }
 }
-
 
 export default App;

@@ -4,7 +4,7 @@ export const Card = (props) => {
 
     return(
         <div className="card">
-            <img alt="profile" src={`https://robohash.org/${props.contact.id}?set=set5`}/>
+            <img alt="profile" src={`https://robohash.org/${props.contact.id}?set=set5?size=150x150`}/>
             <h2>{ props.contact.name }</h2>
             <p>{ props.contact.email }</p>
         </div>
