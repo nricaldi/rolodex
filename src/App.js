@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       contacts: [],
       searchField: "",
+      query: ''
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -24,23 +25,25 @@ class App extends Component {
   }
 
   handleChange = e => {
-    this.setState({ searchField: e.target.value });
+    this.setState({ searchField: e.target.value, query: e.target.value });
   }
 
   render() {
-    const { contacts, searchField } = this.state;
+    const { contacts, searchField, query } = this.state;
     const filteredContacts = contacts.filter(contact => 
       contact.name.toLowerCase().includes(searchField.toLowerCase())
     );
 
     return(
       <div className="App">
+        
 
         <h1>Contact Rolodex</h1>
         <SearchBar 
           placeholder="Search rolodex" 
           handleChange={this.handleChange}
-        />
+          />
+        <h3>Showing results for "{query}"</h3>
         <CardList contacts={filteredContacts} /> 
 
       </div>
